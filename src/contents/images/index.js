@@ -1,0 +1,9 @@
+export const logo = require('./Spotify-Black-and-White-Logo.png');
+export const list = require('./list.png');
+export const cross = require('./cross.png');
+export const no_track = require('./no-audio.png');
+export const dots = require('./dots.png');
+export const speaker = require('./speaker.png');
+export const pause = require('./pause.png');
+export const play = require('./play.png');
+export const forward = require('./forward.png');

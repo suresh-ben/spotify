@@ -1,0 +1,151 @@
+.back-ground {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: -1000;
+}
+
+.audio-player {
+    width: 35rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.audio-holder {
+    margin: 0 2rem;
+    --audio-player: 75%;
+}
+
+.audio-image-container {
+    width: var(--audio-player);
+    margin-top: 2rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.audio-image-container img {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: .5rem;
+}
+
+.audio-bar {
+    width: var(--audio-player);
+    height: 5px;
+    z-index: 10000;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    width: var(--audio-player);
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #ffffff;
+    border-radius: 50%;
+    width: 4px;
+    height: 4px;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    width: 10px;
+    height: 10px;
+}
+
+.input-container {
+    position: relative;
+}
+
+.input-completed {
+    position: absolute;
+    left: 0;
+    top: .85rem;
+    height: 4px;
+    width: calc(var(--audio-player) * var(--completed-percentage));
+    background-color: white;
+    z-index: -1;
+}
+
+.audio-controls {
+    width: var(--audio-player);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: .25rem 0;
+}
+
+.audio-controls div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.audio-controls button {
+    height: 2.2rem;
+    width: 2.2rem;
+    margin: .5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition-duration: 250ms;
+}
+
+.audio-controls button:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.audio-controls img {
+    height: 1rem;
+}
+
+.back-button {
+    transform: rotate(180deg);
+}
+
+.play-pause {
+    transition-duration: 250ms;
+}
+
+.play-pause:hover {
+    transform: scale(1.1);
+}
+
+@media (max-width: 1100px) {
+    .audio-player {
+        width: 100%;
+    }
+    .audio-holder {
+        --audio-player: min(100%, 50vh);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .audio-bar {
+        height: 3px;
+        margin-top: 1rem;
+    }
+    .audio-names {
+        width: var(--audio-player);
+    }
+    .input-container {
+        width: var(--audio-player);
+    }
+    .input-completed {
+        top: 1rem;
+    }
+}

@@ -1,0 +1,42 @@
+.track {
+    display: flex;
+    padding: 1rem;
+    justify-content: space-between;
+    border-radius: .5rem;
+}
+
+.hidden-track {
+    display: none;
+}
+
+.track:hover {
+    cursor: pointer;
+    background-color: rgba(225, 225, 225, 0.1);
+}
+
+.track img {
+    --image-size: 3rem;
+    height: var(--image-size);
+    width: var(--image-size);
+    border-radius: var(--image-size);
+}
+
+.image-names {
+    display: flex;
+}
+
+.track-names {
+    display: flex;
+    flex-direction: column;
+    margin: 0 5rem 0 1rem;
+}
+
+.track-artist {
+    opacity: 0.5;
+    font-size: .8rem;
+}
+
+.track-time {
+    opacity: 0.5;
+    font-size: .9rem;
+}
