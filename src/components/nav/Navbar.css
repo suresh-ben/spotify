@@ -12,8 +12,9 @@
     .navbar {
         display: flex;
         align-items: center;
-        position: relative;
+        position: fixed;
         height: 4rem;
+        z-index: 100;
     }
     .nav-logo {
         margin: 0 1rem;
