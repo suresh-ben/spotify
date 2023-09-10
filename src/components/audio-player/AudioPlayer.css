@@ -12,6 +12,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow-y: auto;
 }
 
 .audio-holder {
@@ -74,6 +75,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
     height: 4px;
     width: calc(var(--audio-player) * var(--completed-percentage));
     background-color: white;
+    border-radius: 5px;
     z-index: -1;
 }
 
@@ -85,15 +87,15 @@ input[type="range"]::-webkit-slider-thumb:hover {
     margin: .25rem 0;
 }
 
-.audio-controls div {
+.main-controls {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .audio-controls button {
-    height: 2.2rem;
     width: 2.2rem;
+    aspect-ratio: 1;
     margin: .5rem;
     display: flex;
     justify-content: center;
@@ -125,6 +127,36 @@ input[type="range"]::-webkit-slider-thumb:hover {
     transform: scale(1.1);
 }
 
+.sound-bar-container {
+    position: absolute;
+    width: 10rem;
+    height: 1.5rem;
+    border-radius: .5rem;
+    background-color: rgba(0, 0, 0, .75);
+    transform: rotate(-90deg) translate(5.6rem);
+    top: 0rem;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.sound-bar-container input {
+    height: .5rem;
+}
+
+.speaker {
+    position: relative;
+}
+
+.sound-bar-hover:hover+.sound-bar-container {
+    display: flex !important;
+}
+
+.sound-bar-container:hover,
+.sound-bar-container:focus {
+    display: flex !important;
+}
+
 @media (max-width: 1100px) {
     .audio-player {
         width: 100%;
@@ -134,6 +166,11 @@ input[type="range"]::-webkit-slider-thumb:hover {
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-bottom: 2rem;
+        margin-top: 4rem;
+    }
+    .audio-names {
+        text-wrap: nowrap;
     }
     .audio-bar {
         height: 3px;
@@ -147,5 +184,28 @@ input[type="range"]::-webkit-slider-thumb:hover {
     }
     .input-completed {
         top: 1rem;
+    }
+    .audio-controls button {
+        width: 15%;
+        margin: 0;
+    }
+    .audio-controls img {
+        height: 50%;
+    }
+    .play-pause {
+        transform: scale(1.35) !important;
+        margin: 0 25px !important;
+    }
+    .track-change {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+    .track-change img {
+        margin-top: .5rem;
+        margin-bottom: .5rem;
+    }
+    .sound-bar-container {
+        padding: .1rem 1.2rem;
+        transform: rotate(-90deg) translate(7rem);
     }
 }

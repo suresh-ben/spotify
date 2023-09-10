@@ -6,11 +6,11 @@ import SelectedSongContext from '../../context/SelectedSongContext';
 
 function AudioPlayer() {
 
-    const { selectedSong, selectedAudio } = useContext(SelectedSongContext);
+    const { selectedSong, selectedAudio, currentPlaylist, trackManager, currentTrack } = useContext(SelectedSongContext);
     const [ percenatgCompleted, setpercentageCompleted] = useState(0);
     const [ prevAudio, setPrevAudio ] = useState(null);
     const [ isPlaying, setIsPlaying ] = useState(false);
-    const [ appliedColor, setAppliedColor] = useState('#000000');
+    const [ sound, setSound] = useState(100);
     const progressBar = useRef();
 
     useEffect(()=>{
@@ -27,6 +27,7 @@ function AudioPlayer() {
             }
             if(selectedAudio) {
                 selectedAudio.currentTime = 0;
+                selectedAudio.volume = sound/100;
                 selectedAudio.play();
     
                 if(prevAudio) 
@@ -79,6 +80,11 @@ function AudioPlayer() {
         }
     }
 
+    useEffect(()=>{
+        if(selectedAudio)
+            selectedAudio.volume = (sound/100);
+    }, [sound]);
+
     return (
         <div className='audio-player'>
             <div className='back-ground' style={{ backgroundColor: selectedSong?.accent, transition: 'background-color 0.5s ease' }}></div> 
@@ -114,28 +120,53 @@ function AudioPlayer() {
                     <button style={{backgroundColor: 'rgba(255, 255, 255, 0.15)'}}>
                         <img src={dots} alt="options" />
                     </button>
-                    <div>
+                    <div className='main-controls'>
                         <button
-                            onClick={()=>updateAudioTime(-15)}
+                            className='track-change'
+                            onClick={()=>{
+                                if(!currentTrack) return; 
+                                let prev = trackManager[currentPlaylist][currentTrack - 1];
+                                if(!prev) prev = trackManager[currentPlaylist][Object.keys(trackManager[currentPlaylist]).length - 1];
+                                    prev();
+                            }}
                         >
                             <img className='back-button' style={{height: '1.5rem'}} src={forward} alt="back" />
                         </button>
                         <button
                             onClick={togglePlayPause}
+                            className='play-pause'
                         >
                             {isPlaying? 
-                                <img className='play-pause' style={{height: '2.2rem'}} src={pause} alt="Pause/Play" />:
-                                <img className='play-pause' style={{height: '2.2rem'}} src={play} alt="Pause/Play" />}
+                                <img style={{height: '2.2rem'}} src={pause} alt="Pause/Play" />:
+                                <img style={{height: '2.2rem'}} src={play} alt="Pause/Play" />}
                         </button>
                         <button
-                            onClick={()=>updateAudioTime(15)}
+                            className='track-change'
+                            onClick={()=>{
+                                if(!currentTrack) return; 
+                                let next = trackManager[currentPlaylist][currentTrack + 1];
+                                if(!next) next = trackManager[currentPlaylist][0];
+                                
+                                next();
+                            }}
                         >
                             <img style={{height: '1.5rem'}} src={forward} alt="forward" />
                         </button>
                     </div>
-                    <button style={{backgroundColor: 'rgba(255, 255, 255, 0.15)'}}>
+                    <button className='speaker' style={{backgroundColor: 'rgba(255, 255, 255, 0.15)'}}>
                         <img src={speaker} alt="sound" />
+                        <div className='sound-bar-hover' style={{position: 'absolute', width: '100%', height: '100%', top: 0, left:0}}></div>
+                        <div className='sound-bar-container'>
+                            <input 
+                                className='sound-bar' type="range" 
+                                defaultValue={100}
+                                onChange={(event)=>{
+                                    setSound(event.target.value);
+                                }}
+                            />
+                        </div>
                     </button>
+                    
                 </div>
             </div>
         </div>

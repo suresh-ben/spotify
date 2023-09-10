@@ -5,12 +5,24 @@ import './Track.css';
 import SelectedSongContext from '../../context/SelectedSongContext';
 import SearchSongContext from '../../context/SearchSongContext';
 
-function Track({song}) {
+function Track({song, trackIndx, trackId}) {
+    //trackInd -- index of this track in the playlist thst user seeing...
     const [ duration, setDuration ] = useState(`00:00`);
     const audioTrack = useRef(null);
     const { searchLine } = useContext(SearchSongContext);
-    const { selectedSong, setSelectedSong, setSelectedAudioTrack } = useContext(SelectedSongContext);
+    const { selectedSong, setSelectedSong, setSelectedAudioTrack, trackManager, setTrackManager, setCurrentPlayList, setCurrentTrack} = useContext(SelectedSongContext);
 
+    useEffect(()=>{
+        let tempTrackManager = trackManager;
+        if(!tempTrackManager[trackId]) tempTrackManager[trackId] = {};
+        tempTrackManager[trackId][trackIndx] = setSelectedSongAndAudio;
+
+        if(trackId == 'top-tracks')
+            console.log()
+
+        setTrackManager(tempTrackManager);
+    }, [song, audioTrack]);
+    
     useEffect(()=>{
         calculateTime();
     }, [audioTrack, audioTrack?.current, audioTrack?.current?.loadedmetadata, audioTrack?.current?.readyState, audioTrack?.current?.duration]);
@@ -36,15 +48,23 @@ function Track({song}) {
         }
     }
 
+    function setSelectedSongAndAudio() {
+        setSelectedSong(song);
+        setSelectedAudioTrack(audioTrack.current);
+
+        //for next and prev
+        setCurrentPlayList(trackId);
+        setCurrentTrack(trackIndx);
+    }
+
     return (
-        <div className={`track ${(searchLine != '' && !(song.name.toLowerCase().includes(searchLine.toLowerCase()) || song.artist.toLowerCase().includes(searchLine.toLowerCase())))? 
+        <div data-key={trackIndx} className={`track ${(searchLine != '' && !(song.name.toLowerCase().includes(searchLine.toLowerCase()) || song.artist.toLowerCase().includes(searchLine.toLowerCase())))? 
             'hidden-track' : 
             null}`
             }
             style={selectedSong?.id == song.id? { backgroundColor: 'rgba(255, 255, 255, 0.25)' } : null}
             onClick={()=>{
-                setSelectedSong(song);
-                setSelectedAudioTrack(audioTrack.current);
+                setSelectedSongAndAudio();
             }}
         >
             <div className='image-names'>
@@ -65,10 +85,10 @@ function TrackSkeleton () {
     return(
         <div className='track'>
             <div className='image-names'>
-                <Skeleton circle width={50} height={50}/>
+                <Skeleton circle width={45} height={45}/>
                 <div className='track-names'>
-                    <Skeleton width={200} height={25}/>
-                    <Skeleton width={100} height={15}/>
+                    <Skeleton width={160} height={20}/>
+                    <Skeleton width={90} height={10}/>
                 </div>
             </div>
             <Skeleton width={50} height={15}/>
