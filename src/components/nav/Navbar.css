@@ -14,7 +14,6 @@
         align-items: center;
         position: relative;
         height: 4rem;
-        background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7));
     }
     .nav-logo {
         margin: 0 1rem;

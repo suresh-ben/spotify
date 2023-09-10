@@ -82,7 +82,12 @@
         margin-top: 1rem;
     }
     .home-content {
-        height: calc(100% - 4rem);
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
     }
     .music-list img {
         height: 2rem;
