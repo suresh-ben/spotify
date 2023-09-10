@@ -196,14 +196,6 @@ input[type="range"]::-webkit-slider-thumb:hover {
         transform: scale(1.35) !important;
         margin: 0 25px !important;
     }
-    .track-change {
-        padding-left: 1.25rem;
-        padding-right: 1.25rem;
-    }
-    .track-change img {
-        margin-top: .5rem;
-        margin-bottom: .5rem;
-    }
     .sound-bar-container {
         padding: .1rem 1.2rem;
         transform: rotate(-90deg) translate(7rem);

@@ -124,10 +124,12 @@ function AudioPlayer() {
                         <button
                             className='track-change'
                             onClick={()=>{
-                                if(!currentTrack) return; 
+                                if(currentTrack === null) return; 
+
                                 let prev = trackManager[currentPlaylist][currentTrack - 1];
                                 if(!prev) prev = trackManager[currentPlaylist][Object.keys(trackManager[currentPlaylist]).length - 1];
-                                    prev();
+                                
+                                prev();
                             }}
                         >
                             <img className='back-button' style={{height: '1.5rem'}} src={forward} alt="back" />
@@ -143,7 +145,8 @@ function AudioPlayer() {
                         <button
                             className='track-change'
                             onClick={()=>{
-                                if(!currentTrack) return; 
+                                if(currentTrack === null) return; 
+
                                 let next = trackManager[currentPlaylist][currentTrack + 1];
                                 if(!next) next = trackManager[currentPlaylist][0];
                                 
