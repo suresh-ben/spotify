@@ -138,10 +138,13 @@ input[type="range"]::-webkit-slider-thumb:hover {
     display: none;
     justify-content: center;
     align-items: center;
+    --sound-bar-fill: 1;
 }
 
 .sound-bar-container input {
+    width: 8rem;
     height: .5rem;
+    z-index: 30;
 }
 
 .speaker {
@@ -157,6 +160,16 @@ input[type="range"]::-webkit-slider-thumb:hover {
     display: flex !important;
 }
 
+.soundbar-fill {
+    position: absolute;
+    background-color: white;
+    width: calc(var(--sound-bar-fill) * 8rem);
+    height: .25rem;
+    left: 1rem;
+    border-radius: .5rem;
+    z-index: 0;
+}
+
 @media (max-width: 1100px) {
     .audio-player {
         width: 100%;
@@ -166,7 +179,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
         margin-top: 4rem;
     }
     .audio-names {
@@ -197,7 +210,14 @@ input[type="range"]::-webkit-slider-thumb:hover {
         margin: 0 25px !important;
     }
     .sound-bar-container {
-        padding: .1rem 1.2rem;
-        transform: rotate(-90deg) translate(7rem);
+        padding: .1rem .25rem;
+        transform: translate(-3.5rem, -4rem);
+    }
+    .sound-bar-container input {
+        height: 5px;
+    }
+    .soundbar-fill {
+        height: 5px;
+        left: 1.3rem;
     }
 }

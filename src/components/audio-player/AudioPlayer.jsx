@@ -12,6 +12,7 @@ function AudioPlayer() {
     const [ isPlaying, setIsPlaying ] = useState(false);
     const [ sound, setSound] = useState(100);
     const progressBar = useRef();
+    const soundBarContainer = useRef();
 
     useEffect(()=>{
         
@@ -83,6 +84,10 @@ function AudioPlayer() {
     useEffect(()=>{
         if(selectedAudio)
             selectedAudio.volume = (sound/100);
+
+        if(soundBarContainer?.current){
+            soundBarContainer.current.style.setProperty('--sound-bar-fill', sound/100);
+        }
     }, [sound]);
 
     return (
@@ -159,14 +164,16 @@ function AudioPlayer() {
                     <button className='speaker' style={{backgroundColor: 'rgba(255, 255, 255, 0.15)'}}>
                         <img src={speaker} alt="sound" />
                         <div className='sound-bar-hover' style={{position: 'absolute', width: '100%', height: '100%', top: 0, left:0}}></div>
-                        <div className='sound-bar-container'>
+                        <div ref={soundBarContainer} className='sound-bar-container'>
                             <input 
                                 className='sound-bar' type="range" 
                                 defaultValue={100}
+                                step="1"
                                 onChange={(event)=>{
                                     setSound(event.target.value);
                                 }}
                             />
+                            <div className='soundbar-fill'></div>
                         </div>
                     </button>
                     
